@@ -8,7 +8,7 @@ class SnakeLadderPlay
 {
     Scanner scanInput = new Scanner(System.in);
     int player = 0;
-    final int WINPOINT = 10;
+    final int WINPOINT = 100;
     
     public int snakeOrLadder()
     {
@@ -31,11 +31,23 @@ class SnakeLadderPlay
         {
             System.out.println("- - swallowed by snake - -");
             playerr = playerr - diceValuee;
+            if(playerr < 0)
+            {
+                playerr = 0;
+                System.out.println("Player restart from zero");
+                return playerr;
+            }
         }
         else
         {
             System.out.println("- - climb up the ladder - -");
             playerr = playerr + diceValuee;
+        }
+        
+        if(playerr > WINPOINT)
+        {
+            playerr = playerr - diceValuee;
+            return playerr;
         }
         return playerr;
     }
