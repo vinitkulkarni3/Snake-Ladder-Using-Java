@@ -44,11 +44,6 @@ class SnakeLadderPlay
             playerr = playerr + diceValuee;
         }
         
-        if(playerr > WINPOINT)
-        {
-            playerr = playerr - diceValuee;
-            return playerr;
-        }
         return playerr;
     }
     
