@@ -1,11 +1,24 @@
 package com.snakeladdermain;
 
 import static java.lang.System.exit;
+import java.util.Random;
 import java.util.Scanner;
 
 class SnakeLadderPlay
 {
     int player = 0;
+    
+    public int rollDice()
+    {
+        int maxDiceValue = 6;
+        int minDiceValue = 1;
+        
+        Random randomValue = new Random();
+        int diceValue = randomValue.nextInt((maxDiceValue - minDiceValue) + 1) + minDiceValue;
+        System.out.println("DICE VALUE : "+diceValue);
+        
+        return diceValue;
+    }
     
     public void startToPlay()
     {
@@ -25,13 +38,16 @@ public class SnakeLadderMain
         int temp = 1;
         while(temp > 0)
         {
-            System.out.println("1.ROLL 3.EXIT");
+            System.out.println("1.ROLL 2.GETDICEVALUE 3.EXIT");
             int opt = scannerInput.nextInt();
             switch(opt)
             {
                 case 1: playObject.startToPlay();
                 break;
-          
+                
+                case 2: playObject.rollDice();
+                break;
+                
                 case 3: exit(0);
                 break;
                 
