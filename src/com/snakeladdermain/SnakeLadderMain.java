@@ -8,8 +8,10 @@ class SnakeLadderPlay
 {
     Scanner scanInput = new Scanner(System.in);
     int player = 0;
+    int player2 = 0;
     final int WINPOINT = 10;
     int count = 0;
+    int count2 = 0;
     
     public int snakeOrLadder()
     {
@@ -79,23 +81,42 @@ class SnakeLadderPlay
         System.out.println("Press r to roll Dice");
         String rollResult = scanInput.next();
         while("r".equals(rollResult))
-        {  
-            count++;
-            player = calculatePlayerValue(player,storeDiceValue);
-            System.out.println("player : "+player);
-            if(isWin(player))
+        {
+            System.out.println("1.firstplayer 2.secondpalyer");
+            int currentPlayer = scanInput.nextInt();  
+        
+            if(currentPlayer == 1)
             {
-                System.out.println("The number of dice thrown to win game is : "+count);
-                System.out.println("player wins the game");
-                return;
+                count++;
+                player = calculatePlayerValue(player,storeDiceValue);
+                System.out.println("player : "+player);
+                if(isWin(player))
+                {
+                    System.out.println("The number of dice thrown to win game is : "+count);
+                    System.out.println("player1 wins the game");
+                    return;
+                }
             }
-            break;
+            else if(currentPlayer == 2)
+            {
+                count2++;
+                player2 = calculatePlayerValue(player2,storeDiceValue);
+                System.out.println("player2 : "+player2);
+                if(isWin(player2))
+                {
+                    System.out.println("The number of dice thrown to win game is : "+count2);
+                    System.out.println("player2 wins the game");
+                    return;
+                }
+            }
+        break;
         }
     }
     
     void stay()
     {
         System.out.println("palyer : "+player);
+        System.out.println("player2: "+player2);
     }
 }
 
