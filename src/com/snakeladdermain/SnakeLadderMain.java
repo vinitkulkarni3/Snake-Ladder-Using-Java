@@ -6,12 +6,11 @@ import java.util.Scanner;
 
 class SnakeLadderPlay
 {
+    final int WINPOINT = 100;
+    
+    int player1 = 0, player2 = 0;
+    int count1 = 0, count2 = 0;
     Scanner scanInput = new Scanner(System.in);
-    int player = 0;
-    int player2 = 0;
-    final int WINPOINT = 10;
-    int count = 0;
-    int count2 = 0;
     
     public int snakeOrLadder()
     {
@@ -24,36 +23,34 @@ class SnakeLadderPlay
         return value;
     }
     
-    public int calculatePlayerValue(int playerr, int diceValuee)
+    public int calculatePlayerValue(int player, int diceValue)
     {
-        
-        //player = player + diceValue;
         int tempRandomValue = snakeOrLadder();
         
         if(tempRandomValue == 5)
         {
             System.out.println("- - swallowed by snake - -");
-            playerr = playerr - diceValuee;
-            if(playerr < 0)
+            player = player - diceValue;
+            if(player < 0)
             {
-                playerr = 0;
+                player = 0;
                 System.out.println("Player restart from zero");
-                return playerr;
+                return player;
             }
         }
         else
         {
             System.out.println("- - climb up the ladder - -");
-            playerr = playerr + diceValuee;
+            player = player + diceValue;
         }
         
-        if(playerr > WINPOINT)
+        if(player > WINPOINT)
         {
-            playerr = playerr - diceValuee;
-            return playerr;
+            player = player - diceValue;
+            return player;
         }
-        
-        return playerr;
+       
+        return player;
     }
     
     
@@ -82,18 +79,18 @@ class SnakeLadderPlay
         String rollResult = scanInput.next();
         while("r".equals(rollResult))
         {
-            System.out.println("1.firstplayer 2.secondpalyer");
+            System.out.println("[1.firstplayer] [2.secondpalyer]");
             int currentPlayer = scanInput.nextInt();  
         
             if(currentPlayer == 1)
             {
-                count++;
-                player = calculatePlayerValue(player,storeDiceValue);
-                System.out.println("player : "+player);
-                if(isWin(player))
+                count1++;
+                player1 = calculatePlayerValue(player1,storeDiceValue);
+                System.out.println("player1 : "+player1);
+                if(isWin(player1))
                 {
-                    System.out.println("The number of dice thrown to win game is : "+count);
-                    System.out.println("player1 wins the game");
+                    System.out.println("The number of dice thrown to win game is : "+count1);
+                    System.out.println("***player1 won the game***");
                     return;
                 }
             }
@@ -105,7 +102,7 @@ class SnakeLadderPlay
                 if(isWin(player2))
                 {
                     System.out.println("The number of dice thrown to win game is : "+count2);
-                    System.out.println("player2 wins the game");
+                    System.out.println("***player2 wins the game***");
                     return;
                 }
             }
@@ -115,8 +112,8 @@ class SnakeLadderPlay
     
     void stay()
     {
-        System.out.println("palyer : "+player);
-        System.out.println("player2: "+player2);
+        System.out.println("palyer1 position is : "+player1);
+        System.out.println("player2 position is : "+player2);
     }
 }
 
@@ -132,7 +129,7 @@ public class SnakeLadderMain
         int temp = 1;
         while(temp > 0)
         {
-            System.out.println("1.ROLL 2.STAY 3.GETDICEVALUE 4.EXIT");
+            System.out.println("[1.ROLL] [2.STAY] [3.GETDICEVALUE] [4.EXIT]");
             int opt = scannerInput.nextInt();
             switch(opt)
             {
