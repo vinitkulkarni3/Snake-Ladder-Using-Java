@@ -7,7 +7,6 @@ import java.util.Scanner;
 class SnakeLadderPlay
 {
     final int WINPOINT = 100;
-    
     int player1 = 0, player2 = 0;
     int count1 = 0, count2 = 0;
     Scanner scanInput = new Scanner(System.in);
@@ -90,8 +89,8 @@ class SnakeLadderPlay
                 if(isWin(player1))
                 {
                     System.out.println("The number of dice thrown to win game is : "+count1);
-                    System.out.println("***player1 won the game***");
-                    return;
+                    System.out.println("\n***player1 won the game***\n");
+                    exit(0);
                 }
             }
             else if(currentPlayer == 2)
@@ -102,8 +101,8 @@ class SnakeLadderPlay
                 if(isWin(player2))
                 {
                     System.out.println("The number of dice thrown to win game is : "+count2);
-                    System.out.println("***player2 wins the game***");
-                    return;
+                    System.out.println("\n***player2 wins the game***\n");
+                    exit(0);
                 }
             }
         break;
