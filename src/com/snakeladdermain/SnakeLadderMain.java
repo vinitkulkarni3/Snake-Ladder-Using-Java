@@ -8,7 +8,8 @@ class SnakeLadderPlay
 {
     Scanner scanInput = new Scanner(System.in);
     int player = 0;
-    final int WINPOINT = 100;
+    final int WINPOINT = 10;
+    int count = 0;
     
     public int snakeOrLadder()
     {
@@ -66,6 +67,11 @@ class SnakeLadderPlay
         return diceValue;
     }
     
+    public boolean isWin(int player)
+    {
+        return WINPOINT == player;
+    }
+    
     public void startToPlay()
     {
         int storeDiceValue = rollDice();
@@ -74,8 +80,15 @@ class SnakeLadderPlay
         String rollResult = scanInput.next();
         while("r".equals(rollResult))
         {  
+            count++;
             player = calculatePlayerValue(player,storeDiceValue);
             System.out.println("player : "+player);
+            if(isWin(player))
+            {
+                System.out.println("The number of dice thrown to win game is : "+count);
+                System.out.println("player wins the game");
+                return;
+            }
             break;
         }
     }
