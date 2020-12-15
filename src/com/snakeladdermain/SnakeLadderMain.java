@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 class SnakeLadderPlay
 {
-    final int WINPOINT = 100;
+    static int x;
+    final int WINPOINT = 10;
     int player1 = 0, player2 = 0;
     int count1 = 0, count2 = 0;
     Scanner scanInput = new Scanner(System.in);
@@ -22,10 +23,19 @@ class SnakeLadderPlay
         return value;
     }
     
-    public int calculatePlayerValue(int player, int diceValue)
+    public int calculatePlayerValue(int player, int diceValue, String tempPlayer)
     {
         int tempRandomValue = snakeOrLadder();
         
+        if(tempPlayer.equals("player1"))
+        {
+            count1++;
+        }
+        else
+        {
+            count2++;
+        }
+  
         if(tempRandomValue == 5)
         {
             System.out.println("- - swallowed by snake - -");
@@ -33,7 +43,7 @@ class SnakeLadderPlay
             if(player < 0)
             {
                 player = 0;
-                System.out.println("Player restart from zero");
+                System.out.println("Player Restart from zero");
                 return player;
             }
         }
@@ -41,14 +51,17 @@ class SnakeLadderPlay
         {
             System.out.println("- - climb up the ladder - -");
             player = player + diceValue;
+            if(player > WINPOINT)
+            {
+                player = player - diceValue;
+                return player;
+            }
+            else
+            {
+                int tempDiceValue = rollDice();
+                player = calculatePlayerValue(player, tempDiceValue,tempPlayer);
+            }
         }
-        
-        if(player > WINPOINT)
-        {
-            player = player - diceValue;
-            return player;
-        }
-       
         return player;
     }
     
@@ -72,41 +85,42 @@ class SnakeLadderPlay
     
     public void startToPlay()
     {
-        int storeDiceValue = rollDice();
+        int currentPlayer = -1;
+        String p1 = "player1";
+        String p2 = "player2";
         
-        System.out.println("Press r to roll Dice");
-        String rollResult = scanInput.next();
-        while("r".equals(rollResult))
+        String rollResult = "r";
+        do
         {
-            System.out.println("[1.firstplayer] [2.secondpalyer]");
-            int currentPlayer = scanInput.nextInt();  
-        
-            if(currentPlayer == 1)
+            if(currentPlayer == -1)
             {
-                count1++;
-                player1 = calculatePlayerValue(player1,storeDiceValue);
+                int storeDiceValue = rollDice();
+                player1 = calculatePlayerValue(player1,storeDiceValue,p1);
                 System.out.println("player1 : "+player1);
+                System.out.println();
                 if(isWin(player1))
                 {
                     System.out.println("The number of dice thrown to win game is : "+count1);
                     System.out.println("\n***player1 won the game***\n");
-                    exit(0);
+                    break;
                 }
             }
-            else if(currentPlayer == 2)
+            else if (currentPlayer == 1)
             {
-                count2++;
-                player2 = calculatePlayerValue(player2,storeDiceValue);
+                int storeDiceValue = rollDice();
+                player2 = calculatePlayerValue(player2,storeDiceValue,p2);
                 System.out.println("player2 : "+player2);
+                System.out.println();
                 if(isWin(player2))
                 {
                     System.out.println("The number of dice thrown to win game is : "+count2);
                     System.out.println("\n***player2 wins the game***\n");
-                    exit(0);
+                    break;
                 }
             }
-        break;
-        }
+            currentPlayer = - currentPlayer;
+            
+        }while("r".equals(rollResult));
     }
     
     void stay()
