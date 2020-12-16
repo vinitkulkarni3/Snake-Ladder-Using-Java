@@ -6,8 +6,7 @@ import java.util.Scanner;
 
 class SnakeLadderPlay
 {
-    static int x;
-    final int WINPOINT = 10;
+    final int WINPOINT = 100;
     int player1 = 0, player2 = 0;
     int count1 = 0, count2 = 0;
     Scanner scanInput = new Scanner(System.in);
